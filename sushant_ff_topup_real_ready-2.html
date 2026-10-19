@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sushant FF TopUp Nepal</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#070b14;color:#fff}
+header{padding:22px 16px;text-align:center;background:linear-gradient(135deg,#101a38,#32105c)}
+.logo{font-size:27px;font-weight:900}.logo b{color:#00e5ff}.tag{color:#b9c3d8;margin-top:6px}
+.wrap{max-width:850px;margin:auto;padding:18px}.card{background:#101827;border:1px solid #24324a;border-radius:18px;padding:18px;margin:14px 0}
+h2{font-size:18px;margin:0 0 12px}.muted{color:#aeb9cb;font-size:13px;line-height:1.5}
+input,select{width:100%;padding:14px;border-radius:12px;border:1px solid #33435d;background:#080e18;color:white;font-size:16px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.pkg{padding:15px;border-radius:14px;background:#151f31;border:1px solid #2b3a54;text-align:center;cursor:pointer}.pkg.active{border-color:#00e5ff;box-shadow:0 0 0 1px #00e5ff}
+.d{font-size:19px;font-weight:800}.p{color:#00e5ff;margin-top:5px;font-weight:800}
+button{width:100%;padding:15px;border:0;border-radius:13px;background:linear-gradient(90deg,#00e5ff,#7d5cff);font-size:16px;font-weight:900;cursor:pointer}
+.notice{padding:12px;border-radius:12px;background:#0c1422;color:#b9c3d8;font-size:13px;line-height:1.55}
+.status{margin-top:12px;padding:12px;border-radius:12px;display:none}
+footer{text-align:center;color:#7f8da5;padding:8px 0 28px;font-size:12px}
+@media(min-width:650px){.grid{grid-template-columns:repeat(3,1fr)}}
+</style>
+</head>
+<body>
+<header><div class="logo">SUSHANT <b>FF TOPUP</b></div><div class="tag">Free Fire Diamond Top-Up • Nepal</div></header>
+<div class="wrap">
+<section class="card">
+<h2>1. Free Fire UID</h2>
+<div class="muted">Apna Player UID enter karein. Password/OTP kabhi na dein.</div><br>
+<input id="uid" inputmode="numeric" placeholder="Example: 1234567890">
+</section>
+<section class="card">
+<h2>2. Diamond Package</h2><div class="grid" id="pkgs"></div>
+</section>
+<section class="card">
+<h2>3. Payment</h2>
+<select id="pay"><option>eSewa</option><option>Khalti</option><option>Fonepay</option></select>
+</section>
+<section class="card">
+<h2>Order Summary</h2>
+<div id="sum" class="notice">UID aur package select karein.</div><br>
+<button onclick="checkout()">Continue to Payment</button>
+<div id="status" class="status"></div>
+</section>
+<div class="notice">⚠️ Ye website ready front-end hai. Real payment aur automatic diamonds ke liye verified payment merchant account + secure backend + authorized top-up supplier/API zaroori hai. Is demo me koi real payment charge nahi hota.</div>
+<footer>© 2026 Sushant FF TopUp Nepal</footer>
+</div>
+<script>
+const packs=[["25 Diamonds","Rs 49"],["50 Diamonds","Rs 98"],["115 Diamonds","Rs 149"],["240 Diamonds","Rs 299"],["610 Diamonds","Rs 739"],["1240 Diamonds","Rs 1499"]];
+let selected=null;
+const box=document.getElementById("pkgs");
+packs.forEach((x,i)=>{let e=document.createElement("div");e.className="pkg";e.innerHTML='<div class="d">💎 '+x[0]+'</div><div class="p">'+x[1]+'</div>';e.onclick=()=>{document.querySelectorAll(".pkg").forEach(a=>a.classList.remove("active"));e.classList.add("active");selected=x;update()};box.appendChild(e)});
+document.getElementById("uid").oninput=update;document.getElementById("pay").onchange=update;
+function update(){let u=document.getElementById("uid").value.trim(),m=document.getElementById("pay").value;document.getElementById("sum").textContent=selected?`UID: ${u||"—"} • ${selected[0]} • ${selected[1]} • ${m}`:"UID aur package select karein."}
+function checkout(){let u=document.getElementById("uid").value.trim(),s=document.getElementById("status");s.style.display="block";s.style.background="#261d08";s.style.color="#ffd978";if(!/^\d{6,15}$/.test(u)||!selected){s.textContent="Valid UID aur diamond package select karein.";return}s.textContent="Demo checkout ready. Real eSewa/Khalti payment ke liye merchant backend connect karna hoga."}
+</script>
+</body></html>
